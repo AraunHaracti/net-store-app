@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "219386641218",
+    "project_id": "net-store-app",
+    "storage_bucket": "net-store-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:219386641218:android:290214f56a8cca1b4266db",
+        "android_client_info": {
+          "package_name": "com.example.netstore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbo8tVcrZrKP_k56ldmowvPqtFZOC-QVQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
