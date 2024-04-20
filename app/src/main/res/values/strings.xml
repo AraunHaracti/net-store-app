@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">NetStore</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="sign_in">Вход</string>
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="email">Почта</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="phone">Телефон</string>
+    <string name="password_repeat">Повторение пароля</string>
 </resources>
