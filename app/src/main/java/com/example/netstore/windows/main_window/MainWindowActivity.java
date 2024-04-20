@@ -13,9 +13,9 @@ public class MainWindowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_container_view_activity);
 
-//        getSupportFragmentManager()
-//                .beginTransaction()
-//                .add(R.id.container_fragment, new ChooseActivityFragment(), "choose_activity_fragment")
-//                .commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.container_fragment, new AddProductFragment(), "test")
+                .commit();
     }
 }
