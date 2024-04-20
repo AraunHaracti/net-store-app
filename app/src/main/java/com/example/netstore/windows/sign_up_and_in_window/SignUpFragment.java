@@ -13,18 +13,24 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.netstore.ObserverObject;
+import com.example.netstore.R;
 import com.example.netstore.databinding.SignUpFragmentBinding;
 import com.example.netstore.models.User;
 import com.example.netstore.viewModels.UserViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class SignUpFragment extends Fragment {
     private SignUpFragmentBinding binding;
+    private Date selectedBirthday;
+
     public SignUpFragment() {
     }
 
@@ -44,6 +50,25 @@ public class SignUpFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        MaterialDatePicker.Builder materialDateBuilder = MaterialDatePicker.Builder.datePicker();
+        materialDateBuilder.setTitleText(getResources().getString(R.string.birthday));
+        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
+
+        binding.editTextBirthday.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER");
+            }
+        });
+
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                selectedBirthday = new Date((long)selection);
+                binding.editTextBirthday.setText(materialDatePicker.getHeaderText());
+            }
+        });
+
         binding.signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,46 +83,62 @@ public class SignUpFragment extends Fragment {
                 viewModel.getInfoData().observe(getViewLifecycleOwner(), new Observer<ObserverObject>() {
                     @Override
                     public void onChanged(ObserverObject observerObject) {
-                        if ((boolean) observerObject.item) {
+                        if (Objects.equals(observerObject.tag, "reg user") && observerObject.status) {
                             getParentFragmentManager().popBackStack();
                         } else {
-                            Toast.makeText(getContext(), "Authentication failed.",
+                            Toast.makeText(getContext(), "Registration failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-                viewModel.Registration(currentUser);
+                String email = binding.editTextEmail.getText().toString();
+                String password = binding.editTextPassword.getText().toString();
+                viewModel.registrationUser(email, password, currentUser);
             }
         });
     }
 
     @Nullable
     private User getCurrentUser() {
-        String login = binding.editTextLogin.getText().toString();
+        String email = binding.editTextEmail.getText().toString();
         String password = binding.editTextPassword.getText().toString();
         String passwordRepeat = binding.editTextPasswordRepeat.getText().toString();
         String name = binding.editTextName.getText().toString();
         String surname = binding.editTextSurname.getText().toString();
-        Date date = new Date(binding.editTextBirthday.getText().toString());
-        String email = binding.editTextEmail.getText().toString();
-        String phone = binding.editTextPhone.getText().toString();
+        Date birthday = selectedBirthday;
 
+        if (password.isEmpty()) {
+            Toast.makeText(getContext(), "Password is empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
 
+        if (!password.equals(passwordRepeat)) {
+            Toast.makeText(getContext(), "Passwords aren't match", Toast.LENGTH_SHORT).show();
+            return null;
+        }
 
+        if (name.isEmpty()) {
+            Toast.makeText(getContext(), "Name is empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
 
+        if (surname.isEmpty()) {
+            Toast.makeText(getContext(), "Surname is empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
 
-        User user = new User(login, password, name, surname, date, email, phone, User.UserType.Client);
+        if (birthday == null) {
+            Toast.makeText(getContext(), "Date is empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        if (email.isEmpty()) {
+            Toast.makeText(getContext(), "Email is empty", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        User user = new User(name, surname, birthday, email, User.UserType.Client);
         return user;
-//    }
-//
-//        return !(binding.editTextLogin.getText().toString().isEmpty() ||
-//                binding.editTextPassword.getText().toString().isEmpty() ||
-//                binding.editTextPasswordRepeat.getText().toString().isEmpty() ||
-//                binding.editTextName.getText().toString().isEmpty() ||
-//                binding.editTextSurname.getText().toString().isEmpty() ||
-//                binding.editTextBirthday.getText().toString().isEmpty() ||
-//                binding.editTextEmail.getText().toString().isEmpty() ||
-//                binding.editTextPhone.getText().toString().isEmpty());
     }
 }
