@@ -15,7 +15,7 @@ public class MainWindowActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container_fragment, new AddProductFragment(), "test")
+                .add(R.id.container_fragment, new AddPlaceFragment(), "test")
                 .commit();
     }
 }

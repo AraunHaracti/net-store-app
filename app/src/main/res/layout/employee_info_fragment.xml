@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Имя сотрудника -->
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Name"/>
+
+    <!-- Фамилия сотрудника -->
+    <TextView
+        android:id="@+id/textViewSurname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Surname"/>
+
+    <!-- День рождения сотрудника -->
+    <TextView
+        android:id="@+id/textViewBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Birthday"/>
+
+    <!-- Email сотрудника -->
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Email"/>
+
+    <!-- Дата приема на работу -->
+    <TextView
+        android:id="@+id/textViewHireDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Hire Date"/>
+
+    <!-- Должность сотрудника -->
+    <TextView
+        android:id="@+id/textViewJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Job"/>
+
+    <!-- Отдел сотрудника -->
+    <TextView
+        android:id="@+id/textViewDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Department"/>
+
+    <!-- Зарплата сотрудника -->
+    <TextView
+        android:id="@+id/textViewSalary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="Salary"/>
+
+</LinearLayout>
