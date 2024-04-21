@@ -11,6 +11,9 @@ public class Product {
     public Double price;
     public int count;
 
+    public Product() {
+    }
+
     public Product(String name, String description, Uri photoUri, Double price, int count) {
         this.name = name;
         this.description = description;
