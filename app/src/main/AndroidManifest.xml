@@ -12,6 +12,14 @@
         android:theme="@style/Theme.NetStore"
         tools:targetApi="31">
         <activity
+            android:name=".windows.employee_windows.EmployeeWindowActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".windows.client_windows.ClientWindowActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".windows.main_window.MainWindowActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>

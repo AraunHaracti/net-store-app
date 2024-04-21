@@ -40,11 +40,17 @@ public class ProductViewModel {
 
                         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
                         CollectionReference collectionReference = fStore.collection("products");
-                        collectionReference.add(product)
-                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+                        DocumentReference newProductRef = collectionReference.document();
+
+                        product._id = newProductRef.getId();
+
+                        newProductRef.set(product)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
-                                    public void onSuccess(DocumentReference documentReference) {
+                                    public void onSuccess(Void unused) {
                                         mutableLiveData.postValue(new ObserverObject("add product", true));
+
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -53,7 +59,6 @@ public class ProductViewModel {
                                         mutableLiveData.postValue(new ObserverObject("add product", false));
                                     }
                                 });
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

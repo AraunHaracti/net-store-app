@@ -5,6 +5,7 @@ import android.net.Uri;
 import java.net.URI;
 
 public class Product {
+    public String _id;
     public String name;
     public String description;
     public Uri photoUri;
@@ -15,6 +16,15 @@ public class Product {
     }
 
     public Product(String name, String description, Uri photoUri, Double price, int count) {
+        this.name = name;
+        this.description = description;
+        this.photoUri = photoUri;
+        this.price = price;
+        this.count = count;
+    }
+
+    public Product(String _id, String name, String description, Uri photoUri, Double price, int count) {
+        this._id = _id;
         this.name = name;
         this.description = description;
         this.photoUri = photoUri;

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import com.example.netstore.R;
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.databinding.AddPlaceFragmentBinding;
 import com.example.netstore.models.Place;

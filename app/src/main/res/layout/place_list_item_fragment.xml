@@ -8,7 +8,7 @@
 
     <!-- Название места -->
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -17,7 +17,7 @@
 
     <!-- Описание места -->
     <TextView
-        android:id="@+id/textViewDescription"
+        android:id="@+id/text_view_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
