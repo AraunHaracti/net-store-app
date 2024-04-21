@@ -6,69 +6,61 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Имя сотрудника -->
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/text_view_firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Name"/>
+        android:text="@string/firstname"/>
 
-    <!-- Фамилия сотрудника -->
     <TextView
-        android:id="@+id/textViewSurname"
+        android:id="@+id/text_view_lastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Surname"/>
+        android:text="@string/lastname"/>
 
-    <!-- День рождения сотрудника -->
     <TextView
-        android:id="@+id/textViewBirthday"
+        android:id="@+id/text_view_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Birthday"/>
+        android:text="@string/birthday"/>
 
-    <!-- Email сотрудника -->
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/text_view_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Email"/>
+        android:text="@string/email"/>
 
-    <!-- Дата приема на работу -->
     <TextView
-        android:id="@+id/textViewHireDate"
+        android:id="@+id/text_view_hire_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Hire Date"/>
+        android:text="@string/hire_date"/>
 
-    <!-- Должность сотрудника -->
     <TextView
-        android:id="@+id/textViewJob"
+        android:id="@+id/text_view_job"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Job"/>
+        android:text="@string/job"/>
 
-    <!-- Отдел сотрудника -->
     <TextView
-        android:id="@+id/textViewDepartment"
+        android:id="@+id/text_view_department"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Department"/>
+        android:text="@string/department"/>
 
-    <!-- Зарплата сотрудника -->
     <TextView
-        android:id="@+id/textViewSalary"
+        android:id="@+id/text_view_salary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Salary"/>
+        android:text="@string/salary"/>
 
 </LinearLayout>

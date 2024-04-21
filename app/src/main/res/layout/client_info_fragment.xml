@@ -6,46 +6,40 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Имя клиента -->
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/text_view_firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Name"/>
+        android:text="@string/firstname"/>
 
-    <!-- Фамилия клиента -->
     <TextView
-        android:id="@+id/textViewSurname"
+        android:id="@+id/text_view_lastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Surname"/>
+        android:text="@string/lastname"/>
 
-    <!-- День рождения клиента -->
     <TextView
-        android:id="@+id/textViewBirthday"
+        android:id="@+id/text_view_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Birthday"/>
+        android:text="@string/birthday"/>
 
-    <!-- Email клиента -->
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/text_view_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Email"/>
+        android:text="@string/email"/>
 
-    <!-- Адрес клиента -->
     <TextView
-        android:id="@+id/textViewAddress"
+        android:id="@+id/text_view_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Address"/>
-
+        android:text="@string/address"/>
 
 </LinearLayout>

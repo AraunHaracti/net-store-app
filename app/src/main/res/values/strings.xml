@@ -17,4 +17,9 @@
     <string name="name">Название</string>
     <string name="type">Тип</string>
     <string name="save">Сохранить</string>
+    <string name="hire_date">Дата приема</string>
+    <string name="job">Должность</string>
+    <string name="department">Отдел</string>
+    <string name="salary">Зарплата</string>
+    <string name="address">Адрес</string>
 </resources>

@@ -5,9 +5,8 @@
     android:layout_height="wrap_content"
     android:padding="16dp">
 
-    <!-- Фотография -->
     <ImageView
-        android:id="@+id/imageViewPhoto"
+        android:id="@+id/image_view_photo"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
@@ -20,22 +19,20 @@
         android:orientation="vertical"
         android:layout_marginStart="16dp">
 
-        <!-- Название -->
         <TextView
-            android:id="@+id/textViewName"
+            android:id="@+id/text_view_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="Name"/>
+            android:text="@string/name"/>
 
-        <!-- Описание -->
         <TextView
-            android:id="@+id/textViewDescription"
+            android:id="@+id/text_view_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Description"/>
+            android:text="@string/description"/>
 
     </LinearLayout>
 
@@ -46,22 +43,19 @@
         android:orientation="vertical"
         android:layout_marginStart="16dp">
 
-        <!-- Цена -->
         <TextView
-            android:id="@+id/textViewPrice"
+            android:id="@+id/text_view_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:text="@string/price"/>
 
-            android:text="Price"/>
-
-        <!-- Количество -->
         <TextView
-            android:id="@+id/textViewCount"
+            android:id="@+id/text_view_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Count"/>
+            android:text="@string/count"/>
 
     </LinearLayout>
 

@@ -35,11 +35,9 @@ public class PlaceListAdapter extends ArrayAdapter<Place> {
 
         Place currentPlace = mPlaces.get(position);
 
-        // Название товара
         TextView nameTextView = listItemView.findViewById(R.id.text_view_name);
         nameTextView.setText(currentPlace.name);
 
-        // Описание товара
         TextView descriptionTextView = listItemView.findViewById(R.id.text_view_description);
         descriptionTextView.setText(currentPlace.description);
 

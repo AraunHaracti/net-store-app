@@ -6,37 +6,33 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Имя пользователя -->
     <TextView
-        android:id="@+id/textViewName"
+        android:id="@+id/text_view_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:text="Name"/>
+        android:text="@string/firstname"/>
 
-    <!-- Фамилия пользователя -->
     <TextView
-        android:id="@+id/textViewSurname"
+        android:id="@+id/text_view_surname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Surname"/>
+        android:text="@string/lastname"/>
 
-    <!-- День рождения пользователя -->
     <TextView
         android:id="@+id/textViewBirthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Birthday"/>
+        android:text="@string/birthday"/>
 
-    <!-- Электронная почта пользователя -->
     <TextView
         android:id="@+id/textViewEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Email"/>
+        android:text="@string/email"/>
 
 </LinearLayout>
