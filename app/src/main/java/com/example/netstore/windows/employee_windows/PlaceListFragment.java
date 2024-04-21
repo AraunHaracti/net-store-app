@@ -47,7 +47,7 @@ public class PlaceListFragment extends Fragment {
             public void onClick(View v) {
                 getParentFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container_fragment, new AddPlaceFragment(), "add place")
+                        .replace(R.id.container_fragment, new WorkWithPlaceFragment(), "add place")
                         .addToBackStack("places")
                         .commit();
             }
@@ -69,7 +69,13 @@ public class PlaceListFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                Toast.makeText(getContext(), "Вы выбрали действие Изменить", Toast.LENGTH_SHORT).show();
+
+                                getParentFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container_fragment, new WorkWithPlaceFragment(place), "edit place")
+                                        .addToBackStack("places")
+                                        .commit();
+
                                 break;
                             case 1:
 

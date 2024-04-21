@@ -16,4 +16,5 @@
     <string name="description">Описание</string>
     <string name="name">Название</string>
     <string name="type">Тип</string>
+    <string name="save">Сохранить</string>
 </resources>

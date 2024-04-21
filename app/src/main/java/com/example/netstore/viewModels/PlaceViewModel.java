@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.models.Place;
-import com.example.netstore.models.Product;
 import com.example.netstore.models.nested.ProductNested;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +43,25 @@ public class PlaceViewModel {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         mutableLiveData.postValue(new ObserverObject("add place", false));
+                    }
+                });
+    }
+
+    public void editPlace(Place place) {
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = fStore.collection("places");
+
+        collectionReference.document(place._id).set(place)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        mutableLiveData.postValue(new ObserverObject("edit place", true));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mutableLiveData.postValue(new ObserverObject("edit place", false));
                     }
                 });
     }
