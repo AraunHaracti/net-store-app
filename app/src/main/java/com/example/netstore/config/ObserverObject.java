@@ -1,4 +1,4 @@
-package com.example.netstore;
+package com.example.netstore.config;
 
 public class ObserverObject {
     public String tag;

@@ -1,4 +1,4 @@
-package com.example.netstore;
+package com.example.netstore.config;
 
 public class Config {
     public static String SP_FILE_TAG = "SP_FILE";

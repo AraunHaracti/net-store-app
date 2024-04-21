@@ -15,21 +15,20 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import com.example.netstore.Config;
-import com.example.netstore.ObserverObject;
+import com.example.netstore.config.Config;
+import com.example.netstore.config.ObserverObject;
 import com.example.netstore.R;
 import com.example.netstore.databinding.SignInFragmentBinding;
 import com.example.netstore.models.User;
 import com.example.netstore.viewModels.UserViewModel;
 import com.example.netstore.windows.main_window.MainWindowActivity;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import java.util.Objects;
 
 public class SignInFragment extends Fragment {
-
     private SignInFragmentBinding binding;
+
     public SignInFragment() {
     }
 
@@ -60,22 +59,18 @@ public class SignInFragment extends Fragment {
             if (!checkFields())
                 return;
 
-
             String email = binding.editTextEmail.getText().toString();
             String password = binding.editTextPassword.getText().toString();
 
             UserViewModel viewModel = new UserViewModel();
 
-            viewModel.getInfoData().observe(getViewLifecycleOwner(), new Observer<ObserverObject>() {
-                @Override
-                public void onChanged(ObserverObject observerObject) {
-                    if (Objects.equals(observerObject.tag, "auth user") && observerObject.status) {
-                        saveCurrentUser((User)observerObject.item);
-                        startMainWindowActivity();
-                    }
-                    else {
-                        Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
-                    }
+            viewModel.getInfoData().observe(getViewLifecycleOwner(), observerObject -> {
+                if (Objects.equals(observerObject.tag, "auth user") && observerObject.status) {
+                    saveCurrentUser((User)observerObject.item);
+                    startMainWindowActivity();
+                }
+                else {
+                    Toast.makeText(getContext(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }
             });
 

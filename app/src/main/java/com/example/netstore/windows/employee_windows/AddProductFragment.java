@@ -1,4 +1,4 @@
-package com.example.netstore.windows.main_window;
+package com.example.netstore.windows.employee_windows;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -15,13 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import com.example.netstore.ObserverObject;
+import com.example.netstore.config.ObserverObject;
 import com.example.netstore.databinding.AddProductFragmentBinding;
 import com.example.netstore.models.Product;
-import com.example.netstore.models.User;
 import com.example.netstore.viewModels.ProductViewModel;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class AddProductFragment extends Fragment {
