@@ -269,8 +269,12 @@ public class UserViewModel {
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Client client = documentSnapshot.toObject(Client.class);
-                        mutableLiveData.postValue(new ObserverObject("get client", true, client));
+                        if (documentSnapshot.exists()) {
+                            Client client = documentSnapshot.toObject(Client.class);
+                            mutableLiveData.postValue(new ObserverObject("get client", true, client));
+                        } else {
+                            mutableLiveData.postValue(new ObserverObject("get client", false));
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
