@@ -22,4 +22,16 @@
     <string name="department">Отдел</string>
     <string name="salary">Зарплата</string>
     <string name="address">Адрес</string>
+    <string name="account">Аккаунт</string>
+    <string name="place">Места</string>
+    <string name="product">Товар</string>
+    <string name="users">Пользователи</string>
+    <string name="orders">Заказы</string>
+    <string name="inventory">Инвентаризация</string>
+    <string name="exit">Выход</string>
+    <string name="receive">Поступление</string>
+    <string name="send">Отправка</string>
+    <string name="move">Перемещение</string>
+    <string name="clients">Клиенты</string>
+    <string name="employees">Работники</string>
 </resources>

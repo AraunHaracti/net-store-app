@@ -15,7 +15,7 @@ public class EmployeeWindowActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container_fragment, new ProductListFragment(), "test")
+                .add(R.id.container_fragment, new EmployeeMainWindowFragment(), "employee_fragment")
                 .commit();
     }
 }
