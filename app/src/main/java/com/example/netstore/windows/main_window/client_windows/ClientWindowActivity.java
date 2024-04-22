@@ -15,7 +15,7 @@ public class ClientWindowActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container_fragment, new ProductListFragment(), "test")
+                .add(R.id.container_fragment, new ClientMainWindowFragment(), "client_main_window")
                 .commit();
     }
 }
