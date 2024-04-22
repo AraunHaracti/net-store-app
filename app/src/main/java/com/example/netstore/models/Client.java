@@ -10,12 +10,12 @@ public class Client extends User {
     public Client() {
     }
 
-    public Client(String firebaseId, String name, String surname, Date birthday, String email, UserType type) {
-        super(firebaseId, name, surname, birthday, email, type);
+    public Client(String _id, String firebaseId, String email, String name, String surname, Date birthday, UserType type) {
+        super(_id, firebaseId, email, name, surname, birthday, type);
     }
 
-    public Client(String firebaseId, String name, String surname, Date birthday, String email, UserType type, String address, List<Order> orders) {
-        super(firebaseId, name, surname, birthday, email, type);
+    public Client(String _id, String firebaseId, String email, String name, String surname, Date birthday, UserType type, String address, List<Order> orders) {
+        super(_id, firebaseId, email, name, surname, birthday, type);
         this.address = address;
         this.orders = orders;
     }

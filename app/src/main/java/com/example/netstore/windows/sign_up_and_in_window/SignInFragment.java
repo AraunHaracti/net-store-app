@@ -66,7 +66,7 @@ public class SignInFragment extends Fragment {
 
             viewModel.getInfoData().observe(getViewLifecycleOwner(), observerObject -> {
                 if (Objects.equals(observerObject.tag, "auth user") && observerObject.status) {
-                    saveCurrentUser((User)observerObject.item);
+                    viewModel.saveCurrentUser(getContext(), (User)observerObject.item);
                     startMainWindowActivity();
                 }
                 else {
@@ -88,12 +88,5 @@ public class SignInFragment extends Fragment {
         Intent intent = new Intent(currentActivity.getBaseContext(), MainWindowActivity.class);
         startActivity(intent);
         currentActivity.finish();
-    }
-
-    private void saveCurrentUser(User user) {
-        String currentUserJson = new Gson().toJson(user, User.class);
-        SharedPreferences.Editor editorSP = getActivity().getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE).edit();
-        editorSP.putString(Config.SP_USER_TAG, currentUserJson);
-        editorSP.apply();
     }
 }

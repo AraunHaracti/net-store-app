@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.netstore.MainActivity;
 import com.example.netstore.R;
 import com.example.netstore.config.Config;
 import com.example.netstore.databinding.EmployeeMainWindowFragmentBinding;
@@ -23,7 +24,6 @@ import com.example.netstore.windows.main_window.employee_windows.orders.OrdersFr
 import com.example.netstore.windows.main_window.employee_windows.places.PlaceListFragment;
 import com.example.netstore.windows.main_window.employee_windows.products.ProductListFragment;
 import com.example.netstore.windows.main_window.employee_windows.users.UserBtnFragment;
-import com.example.netstore.windows.main_window.MainWindowActivity;
 
 public class EmployeeMainWindowFragment extends Fragment {
     private EmployeeMainWindowFragmentBinding binding;
@@ -113,8 +113,7 @@ public class EmployeeMainWindowFragment extends Fragment {
                 spEditor.putString(Config.SP_USER_TAG, "");
                 spEditor.apply();
 
-                Intent intent = new Intent(getContext(), MainWindowActivity.class);
-                startActivity(intent);
+                closeActivity();
             }
         });
         builder.setNegativeButton("Нет", new DialogInterface.OnClickListener() {
@@ -130,5 +129,10 @@ public class EmployeeMainWindowFragment extends Fragment {
                 dialog.show();
             }
         });
+    }
+
+    private void closeActivity() {
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        startActivity(intent);
     }
 }

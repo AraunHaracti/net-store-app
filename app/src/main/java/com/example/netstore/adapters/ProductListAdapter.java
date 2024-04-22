@@ -52,7 +52,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         descriptionTextView.setText(currentProduct.description);
 
         // Фотография товара
-        ImageView photoImageView = listItemView.findViewById(R.id.image_view_photo);
+        ImageView photoImageView = listItemView.findViewById(R.id.image_view_photo); // TODO
         if (currentProduct.photoPath != null) {
 
             File file = null;

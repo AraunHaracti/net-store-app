@@ -3,6 +3,7 @@ package com.example.netstore.models;
 import java.util.Date;
 
 public class User {
+    public String _id;
     public String firebaseId;
     public String email;
     public String name;
@@ -25,17 +26,13 @@ public class User {
         this.type = type;
     }
 
-    public User(String firebaseId,
-                String name,
-                String surname,
-                Date birthday,
-                String email,
-                UserType type) {
+    public User(String _id, String firebaseId, String email, String name, String surname, Date birthday, UserType type) {
+        this._id = _id;
         this.firebaseId = firebaseId;
+        this.email = email;
         this.name = name;
         this.surname = surname;
         this.birthday = birthday;
-        this.email = email;
         this.type = type;
     }
 

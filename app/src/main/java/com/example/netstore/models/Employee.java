@@ -11,12 +11,12 @@ public class Employee extends User {
     public Employee() {
     }
 
-    public Employee(String firebaseId, String name, String surname, Date birthday, String email, UserType type) {
-        super(firebaseId, name, surname, birthday, email, type);
+    public Employee(String _id, String firebaseId, String email, String name, String surname, Date birthday, UserType type) {
+        super(_id, firebaseId, email, name, surname, birthday, type);
     }
 
-    public Employee(String firebaseId, String name, String surname, Date birthday, String email, UserType type, Date hireDate, String job, String department, double salary) {
-        super(firebaseId, name, surname, birthday, email, type);
+    public Employee(String _id, String firebaseId, String email, String name, String surname, Date birthday, UserType type, Date hireDate, String job, String department, double salary) {
+        super(_id, firebaseId, email, name, surname, birthday, type);
         this.hireDate = hireDate;
         this.job = job;
         this.department = department;
