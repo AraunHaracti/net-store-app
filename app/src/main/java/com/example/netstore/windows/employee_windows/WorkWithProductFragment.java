@@ -16,22 +16,41 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.netstore.config.ObserverObject;
-import com.example.netstore.databinding.AddProductFragmentBinding;
+import com.example.netstore.config.WorkWithItemMode;
+import com.example.netstore.databinding.WorkWithProductFragmentBinding;
 import com.example.netstore.models.Product;
 import com.example.netstore.viewModels.ProductViewModel;
 
+import java.io.File;
 import java.util.Objects;
 
-public class AddProductFragment extends Fragment {
-    private AddProductFragmentBinding binding;
+public class WorkWithProductFragment extends Fragment {
+    private WorkWithProductFragmentBinding binding;
+    private Product currentProduct;
 
-    public AddProductFragment() {
+    private WorkWithItemMode doMode;
+
+    public WorkWithProductFragment() {
+        doMode = WorkWithItemMode.Add;
+    }
+
+    public WorkWithProductFragment(Product product) {
+        this.currentProduct = product;
+        doMode = WorkWithItemMode.Edit;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = AddProductFragmentBinding.inflate(inflater, container, false);
+        binding = WorkWithProductFragmentBinding.inflate(inflater, container, false);
+
+        if (currentProduct != null) {
+            binding.textEditName.setText(currentProduct.name);
+            binding.textEditDescription.setText(currentProduct.description);
+            binding.imageViewProduct.setImageURI(Uri.fromFile(new File(currentProduct.photoPath)));
+            binding.textEditPrice.setText(currentProduct.price.toString());
+        }
+
         return binding.getRoot();
     }
 
@@ -47,12 +66,11 @@ public class AddProductFragment extends Fragment {
             }
         });
 
-        binding.addProductBtn.setOnClickListener(new View.OnClickListener() {
+        binding.saveProductBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Product currentProduct = getCurrentProduct();
 
-                if (currentProduct == null)
+                if (!formCurrentProduct())
                     return;
 
                 ProductViewModel viewModel = new ProductViewModel();
@@ -60,51 +78,57 @@ public class AddProductFragment extends Fragment {
                 viewModel.getInfoData().observe(getViewLifecycleOwner(), new Observer<ObserverObject>() {
                     @Override
                     public void onChanged(ObserverObject observerObject) {
-                        if (Objects.equals(observerObject.tag, "add product") && observerObject.status) {
+                        if ((Objects.equals(observerObject.tag, "add product") || observerObject.tag == "edit product") && observerObject.status) {
                             getParentFragmentManager().popBackStack();
                         } else {
-                            Toast.makeText(getContext(), "Add failed.",
+                            Toast.makeText(getContext(), "Save failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-                viewModel.addProduct(currentProduct);
+                switch (doMode) {
+                    case Add:
+                        viewModel.addProduct(currentProduct);
+                        break;
+                    case Edit:
+                        viewModel.editProduct(currentProduct);
+                        break;
+                }
             }
         });
     }
 
     @Nullable
-    private Product getCurrentProduct() {
+    private boolean formCurrentProduct() {
         String name = binding.textEditName.getText().toString();
         String description = binding.textEditDescription.getText().toString();
 
         String priceString = binding.textEditPrice.getText().toString();
 
-        Uri photoUri = this.photoUri;
-
         if (name.isEmpty()) {
             Toast.makeText(getContext(), "Name is empty", Toast.LENGTH_SHORT).show();
-            return null;
+            return false;
         }
 
         if (description.isEmpty()) {
             Toast.makeText(getContext(), "Description is empty", Toast.LENGTH_SHORT).show();
-            return null;
+            return false;
         }
 
         if (priceString.isEmpty()) {
             Toast.makeText(getContext(), "Price is empty", Toast.LENGTH_SHORT).show();
-            return null;
+            return false;
         }
 
         if (photoUri == null) {
             Toast.makeText(getContext(), "Photo is empty", Toast.LENGTH_SHORT).show();
-            return null;
+            return false;
         }
 
-        Product currentProduct = new Product(name, description, photoUri, Double.parseDouble(priceString), 0);
-        return currentProduct;
+        this.currentProduct = new Product(name, description, photoUri.toString(), Double.parseDouble(priceString), 0);
+
+        return true;
     }
 
     private Uri photoUri;

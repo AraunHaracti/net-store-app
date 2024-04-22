@@ -46,11 +46,11 @@ public class SignUpFragment extends Fragment {
         materialDateBuilder.setTitleText(getResources().getString(R.string.birthday));
         final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
 
-        binding.editTextBirthday.setOnClickListener(v -> materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER"));
+        binding.textEditBirthday.setOnClickListener(v -> materialDatePicker.show(getParentFragmentManager(), "MATERIAL_DATE_PICKER"));
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
             selectedBirthday = new Date((long)selection);
-            binding.editTextBirthday.setText(materialDatePicker.getHeaderText());
+            binding.textEditBirthday.setText(materialDatePicker.getHeaderText());
         });
 
         binding.signUpBtn.setOnClickListener(v -> {
@@ -71,19 +71,19 @@ public class SignUpFragment extends Fragment {
                 }
             });
 
-            String email = binding.editTextEmail.getText().toString();
-            String password = binding.editTextPassword.getText().toString();
+            String email = binding.textEditEmail.getText().toString();
+            String password = binding.textEditPassword.getText().toString();
             viewModel.registrationUser(email, password, currentUser);
         });
     }
 
     @Nullable
     private User getCurrentUser() {
-        String email = binding.editTextEmail.getText().toString();
-        String password = binding.editTextPassword.getText().toString();
-        String passwordRepeat = binding.editTextPasswordRepeat.getText().toString();
-        String name = binding.editTextName.getText().toString();
-        String surname = binding.editTextSurname.getText().toString();
+        String email = binding.textEditEmail.getText().toString();
+        String password = binding.textEditPassword.getText().toString();
+        String passwordRepeat = binding.textEditPasswordRepeat.getText().toString();
+        String name = binding.textEditFirstname.getText().toString();
+        String surname = binding.editTextLastname.getText().toString();
         Date birthday = selectedBirthday;
 
         if (password.isEmpty()) {

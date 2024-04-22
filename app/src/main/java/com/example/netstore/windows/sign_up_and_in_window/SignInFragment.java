@@ -59,8 +59,8 @@ public class SignInFragment extends Fragment {
             if (!checkFields())
                 return;
 
-            String email = binding.editTextEmail.getText().toString();
-            String password = binding.editTextPassword.getText().toString();
+            String email = binding.textEditEmail.getText().toString();
+            String password = binding.textEditPassword.getText().toString();
 
             UserViewModel viewModel = new UserViewModel();
 
@@ -79,8 +79,8 @@ public class SignInFragment extends Fragment {
     }
 
     private boolean checkFields() {
-        return !(binding.editTextEmail.getText().toString().isEmpty() ||
-                binding.editTextPassword.getText().toString().isEmpty());
+        return !(binding.textEditEmail.getText().toString().isEmpty() ||
+                binding.textEditPassword.getText().toString().isEmpty());
     }
 
     private void startMainWindowActivity() {

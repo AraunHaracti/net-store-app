@@ -19,7 +19,7 @@ import com.example.netstore.viewModels.PlaceViewModel;
 
 public class WorkWithPlaceFragment extends Fragment {
     private WorkWithPlaceFragmentBinding binding;
-    private Place currentPlace = new Place();
+    private Place currentPlace;
 
     private WorkWithItemMode doMode;
 
@@ -41,7 +41,9 @@ public class WorkWithPlaceFragment extends Fragment {
             binding.textEditName.setText(currentPlace.name);
             binding.textEditDescription.setText(currentPlace.description);
         }
-
+        else {
+            currentPlace = new Place();
+        }
 
         return binding.getRoot();
     }

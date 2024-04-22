@@ -2,6 +2,7 @@ package com.example.netstore.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,12 @@ import androidx.annotation.Nullable;
 
 import com.example.netstore.R;
 import com.example.netstore.models.Product;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
 import java.util.List;
 
 public class ProductListAdapter extends ArrayAdapter<Product> {
@@ -38,27 +44,38 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         Product currentProduct = mProducts.get(position);
 
         // Название товара
-        TextView nameTextView = listItemView.findViewById(R.id.textViewName);
+        TextView nameTextView = listItemView.findViewById(R.id.text_view_name);
         nameTextView.setText(currentProduct.name);
 
         // Описание товара
-        TextView descriptionTextView = listItemView.findViewById(R.id.textViewDescription);
+        TextView descriptionTextView = listItemView.findViewById(R.id.text_view_description);
         descriptionTextView.setText(currentProduct.description);
 
         // Фотография товара
-        ImageView photoImageView = listItemView.findViewById(R.id.imageViewPhoto);
-        if (currentProduct.photoUri != null) {
-            photoImageView.setImageURI(currentProduct.photoUri);
+        ImageView photoImageView = listItemView.findViewById(R.id.image_view_photo);
+        if (currentProduct.photoPath != null) {
+
+            File file = null;
+            try {
+                file = File.createTempFile(currentProduct.photoPath, "");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FirebaseStorage fStorage = FirebaseStorage.getInstance();
+            fStorage.getReference().child(currentProduct.photoPath).getFile(file);
+
+            photoImageView.setImageURI(Uri.fromFile(new File(currentProduct.photoPath, "jpg")));
         } else {
             photoImageView.setImageResource(R.drawable.placeholder_image);
         }
 
         // Цена товара
-        TextView priceTextView = listItemView.findViewById(R.id.textViewPrice);
+        TextView priceTextView = listItemView.findViewById(R.id.text_view_price);
         priceTextView.setText(String.format("%.2f", currentProduct.price) + " руб.");
 
         // Количество товара
-        TextView countTextView = listItemView.findViewById(R.id.textViewCount);
+        TextView countTextView = listItemView.findViewById(R.id.text_view_count);
         countTextView.setText("В наличии: " + currentProduct.count);
 
         // Изменение цвета элемента списка, если товара нет
