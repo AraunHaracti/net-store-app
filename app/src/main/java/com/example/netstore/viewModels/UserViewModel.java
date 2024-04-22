@@ -24,6 +24,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class UserViewModel {
     private MutableLiveData<ObserverObject> mutableLiveData = new MutableLiveData<>();
     public LiveData<ObserverObject> getInfoData() {
@@ -124,6 +127,100 @@ public class UserViewModel {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         mutableLiveData.postValue(new ObserverObject("update user", false));
+                    }
+                });
+    }
+
+    public void getClients() {
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = fStore.collection("users");
+
+        collectionReference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Client> clientList = new ArrayList<>();
+                        for (DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
+                            Client client = new Client();
+
+                            switch (documentSnapshot.getString("type")) {
+                                case "Employee":
+                                    client.type = User.UserType.Employee;
+                                    break;
+                                case "Client":
+                                    client.type = User.UserType.Client;
+                                    break;
+                            }
+
+                            if (client.type != User.UserType.Client)
+                                continue;
+
+                            client._id = documentSnapshot.getString("_id");
+                            client.firebaseId = documentSnapshot.getString("firebaseId");
+                            client.name = documentSnapshot.getString("name");
+                            client.surname = documentSnapshot.getString("surname");
+                            client.address = documentSnapshot.getString("address");
+                            client.email = documentSnapshot.getString("email");
+                            client.birthday = documentSnapshot.getDate("birthday");
+
+                            clientList.add(client);
+                        }
+                        mutableLiveData.postValue(new ObserverObject("get list client", true, clientList));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mutableLiveData.postValue(new ObserverObject("get list client", false));
+                    }
+                });
+    }
+
+    public void getEmployees() {
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        CollectionReference collectionReference = fStore.collection("users");
+
+        collectionReference.get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Employee> employeeList = new ArrayList<>();
+                        for (DocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
+                            Employee employee = new Employee();
+
+                            switch (documentSnapshot.getString("type")) {
+                                case "Employee":
+                                    employee.type = User.UserType.Employee;
+                                    break;
+                                case "Client":
+                                    employee.type = User.UserType.Client;
+                                    break;
+                            }
+
+                            if (employee.type != User.UserType.Employee)
+                                continue;
+
+                            employee._id = documentSnapshot.getString("_id");
+                            employee.firebaseId = documentSnapshot.getString("firebaseId");
+                            employee.name = documentSnapshot.getString("name");
+                            employee.surname = documentSnapshot.getString("surname");
+                            employee.email = documentSnapshot.getString("email");
+                            employee.birthday = documentSnapshot.getDate("birthday");
+
+                            employee.department = documentSnapshot.getString("department");
+                            employee.hireDate = documentSnapshot.getDate("hireDate");
+                            employee.job = documentSnapshot.getString("job");
+                            employee.salary = documentSnapshot.get("salary", double.class);
+
+                            employeeList.add(employee);
+                        }
+                        mutableLiveData.postValue(new ObserverObject("get list employee", true, employeeList));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        mutableLiveData.postValue(new ObserverObject("get list employee", false));
                     }
                 });
     }
