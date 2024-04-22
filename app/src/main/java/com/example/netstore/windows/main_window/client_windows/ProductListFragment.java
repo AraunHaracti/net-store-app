@@ -1,4 +1,4 @@
-package com.example.netstore.windows.client_windows;
+package com.example.netstore.windows.main_window.client_windows;
 
 import androidx.fragment.app.Fragment;
 

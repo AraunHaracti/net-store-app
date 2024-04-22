@@ -1,4 +1,4 @@
-package com.example.netstore.windows.client_windows;
+package com.example.netstore.windows.main_window.employee_windows;
 
 import android.os.Bundle;
 
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.netstore.R;
 
-public class ClientWindowActivity extends AppCompatActivity {
+public class EmployeeWindowActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +15,7 @@ public class ClientWindowActivity extends AppCompatActivity {
 
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.container_fragment, new ProductListFragment(), "test")
+                .add(R.id.container_fragment, new EmployeeMainWindowFragment(), "employee_fragment")
                 .commit();
     }
 }

@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.netstore.config.Config;
 import com.example.netstore.MainActivity;
 import com.example.netstore.models.User;
-import com.example.netstore.windows.client_windows.ClientWindowActivity;
-import com.example.netstore.windows.employee_windows.EmployeeWindowActivity;
+import com.example.netstore.windows.main_window.client_windows.ClientWindowActivity;
+import com.example.netstore.windows.main_window.employee_windows.EmployeeWindowActivity;
 import com.google.gson.Gson;
 
 public class MainWindowActivity extends AppCompatActivity {

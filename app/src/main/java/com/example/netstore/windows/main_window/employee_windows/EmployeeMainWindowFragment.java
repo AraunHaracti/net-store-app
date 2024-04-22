@@ -1,4 +1,4 @@
-package com.example.netstore.windows.employee_windows;
+package com.example.netstore.windows.main_window.employee_windows;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -17,6 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.example.netstore.R;
 import com.example.netstore.config.Config;
 import com.example.netstore.databinding.EmployeeMainWindowFragmentBinding;
+import com.example.netstore.windows.main_window.employee_windows.account.EmployeeAccountFragment;
+import com.example.netstore.windows.main_window.employee_windows.inventorying.InventoryingChosenDoingFragment;
+import com.example.netstore.windows.main_window.employee_windows.orders.OrdersFragment;
+import com.example.netstore.windows.main_window.employee_windows.places.PlaceListFragment;
+import com.example.netstore.windows.main_window.employee_windows.products.ProductListFragment;
+import com.example.netstore.windows.main_window.employee_windows.users.UserBtnFragment;
 import com.example.netstore.windows.main_window.MainWindowActivity;
 
 public class EmployeeMainWindowFragment extends Fragment {

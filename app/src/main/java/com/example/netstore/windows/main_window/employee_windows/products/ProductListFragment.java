@@ -1,4 +1,4 @@
-package com.example.netstore.windows.employee_windows;
+package com.example.netstore.windows.main_window.employee_windows.products;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.netstore.R;
-import com.example.netstore.adapters.PlaceListAdapter;
 import com.example.netstore.adapters.ProductListAdapter;
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.databinding.ListItemsWithBtnFragmentBinding;
-import com.example.netstore.models.Place;
 import com.example.netstore.models.Product;
-import com.example.netstore.viewModels.PlaceViewModel;
 import com.example.netstore.viewModels.ProductViewModel;
 
 import java.util.List;

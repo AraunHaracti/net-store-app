@@ -1,4 +1,4 @@
-package com.example.netstore.windows.employee_windows;
+package com.example.netstore.windows.main_window.employee_windows.users;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

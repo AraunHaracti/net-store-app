@@ -1,4 +1,4 @@
-package com.example.netstore.windows.employee_windows;
+package com.example.netstore.windows.main_window.employee_windows.places;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
