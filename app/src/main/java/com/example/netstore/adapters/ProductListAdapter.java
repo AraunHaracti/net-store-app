@@ -53,22 +53,22 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 
         // Фотография товара
         ImageView photoImageView = listItemView.findViewById(R.id.image_view_photo); // TODO
-        if (currentProduct.photoPath != null) {
-
-            File file = null;
-            try {
-                file = File.createTempFile(currentProduct.photoPath, "");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            FirebaseStorage fStorage = FirebaseStorage.getInstance();
-            fStorage.getReference().child(currentProduct.photoPath).getFile(file);
-
-            photoImageView.setImageURI(Uri.fromFile(new File(currentProduct.photoPath, "jpg")));
-        } else {
+//        if (currentProduct.photoPath != null) {
+//
+//            File file = null;
+//            try {
+//                file = File.createTempFile(currentProduct.photoPath, "");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            FirebaseStorage fStorage = FirebaseStorage.getInstance();
+//            fStorage.getReference().child(currentProduct.photoPath).getFile(file);
+//
+//            photoImageView.setImageURI(Uri.fromFile(new File(currentProduct.photoPath, "jpg")));
+//        } else {
             photoImageView.setImageResource(R.drawable.placeholder_image);
-        }
+//        }
 
         // Цена товара
         TextView priceTextView = listItemView.findViewById(R.id.text_view_price);

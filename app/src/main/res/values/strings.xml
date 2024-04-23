@@ -23,7 +23,7 @@
     <string name="salary">Зарплата</string>
     <string name="address">Адрес</string>
     <string name="account">Аккаунт</string>
-    <string name="place">Места</string>
+    <string name="places">Места</string>
     <string name="product">Товар</string>
     <string name="users">Пользователи</string>
     <string name="orders">Заказы</string>
@@ -35,4 +35,7 @@
     <string name="clients">Клиенты</string>
     <string name="employees">Работники</string>
     <string name="shopping_cart">Корзина</string>
+    <string name="place">Место</string>
+    <string name="place_begin">Место начала</string>
+    <string name="place_end">Место назначения</string>
 </resources>

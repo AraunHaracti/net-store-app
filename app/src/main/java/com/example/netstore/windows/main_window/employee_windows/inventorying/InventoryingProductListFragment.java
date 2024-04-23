@@ -1,4 +1,4 @@
-package com.example.netstore.windows.main_window.client_windows.products;
+package com.example.netstore.windows.main_window.employee_windows.inventorying;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -13,34 +13,32 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
 import com.example.netstore.R;
 import com.example.netstore.adapters.ProductListAdapter;
-import com.example.netstore.config.Config;
-import com.example.netstore.config.ObserverObject;
-import com.example.netstore.databinding.ListItemsFragmentBinding;
 import com.example.netstore.databinding.ListItemsWithBtnFragmentBinding;
 import com.example.netstore.models.Product;
-import com.example.netstore.models.User;
-import com.example.netstore.viewModels.ProductViewModel;
-import com.example.netstore.viewModels.ShoppingCartViewModel;
-import com.example.netstore.viewModels.UserViewModel;
 import com.example.netstore.windows.main_window.employee_windows.products.WorkWithProductFragment;
 import com.google.gson.Gson;
 
 import java.util.List;
 
-public class ProductListFragment extends Fragment {
-    private ListItemsFragmentBinding binding;
+public class InventoryingProductListFragment extends Fragment {
+    private ListItemsWithBtnFragmentBinding binding;
 
     private List<Product> productList;
     private ProductListAdapter productListAdapter;
+    private String configTag;
+
+    public InventoryingProductListFragment(List<Product> productList, String configTag) {
+        this.productList = productList;
+        this.configTag = configTag;
+    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = ListItemsFragmentBinding.inflate(inflater, container, false);
+        binding = ListItemsWithBtnFragmentBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -49,6 +47,17 @@ public class ProductListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         updateList();
+
+        binding.addItemBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getParentFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container_fragment, new WorkWithProductFragment(), "add product")
+                        .addToBackStack("products")
+                        .commit();
+            }
+        });
 
         binding.listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -62,17 +71,25 @@ public class ProductListFragment extends Fragment {
     public void showDoingsDialog(Product product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Выберите действие для места: " + product.name)
-                .setItems(new String[] {"Добавить в корзину"}, new DialogInterface.OnClickListener() {
+                .setItems(new String[] {"Выбрать", "Изменить"}, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
 
-                                SharedPreferences preferences = getActivity().getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE);
-                                User currentUser = new Gson().fromJson(preferences.getString(Config.SP_FILE_TAG, ""), User.class);
+                                SharedPreferences.Editor spEditor = getContext().getSharedPreferences(Config.SP_FILE_NAME, Context.MODE_PRIVATE).edit();
+                                spEditor.putString(configTag, new Gson().toJson(product));
+                                spEditor.apply();
 
-                                ShoppingCartViewModel viewModel = new ShoppingCartViewModel();
+                                getParentFragmentManager().popBackStack();
 
-                                viewModel.addProductInShoppingCart(currentUser, product);
+                                break;
+                            case 1:
+
+                                getParentFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container_fragment, new WorkWithProductFragment(product), "edit product")
+                                        .addToBackStack("products")
+                                        .commit();
 
                                 break;
                         }
@@ -83,18 +100,7 @@ public class ProductListFragment extends Fragment {
     }
 
     private void updateList() {
-
-        ProductViewModel productViewModel = new ProductViewModel();
-        productViewModel.getInfoData().observe(getViewLifecycleOwner(), new Observer<ObserverObject>() {
-            @Override
-            public void onChanged(ObserverObject observerObject) {
-                if(observerObject.tag == "get list product" && observerObject.status) {
-                    productList = (List<Product>) observerObject.item;
-                    productListAdapter = new ProductListAdapter(getContext(), productList);
-                    binding.listView.setAdapter(productListAdapter);
-                }
-            }
-        });
-        productViewModel.getProducts();
+        productListAdapter = new ProductListAdapter(getContext(), productList);
+        binding.listView.setAdapter(productListAdapter);
     }
 }
