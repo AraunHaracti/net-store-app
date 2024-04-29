@@ -16,62 +16,41 @@ import com.example.netstore.models.Employee;
 import java.util.List;
 
 public class EmployeeListAdapter extends ArrayAdapter<Employee> {
-    private Context mContext;
-    private List<Employee> mEmployees;
+    private Context context;
+    private List<Employee> employeeList;
 
-    public EmployeeListAdapter(@NonNull Context context, @NonNull List<Employee> users) {
-        super(context, R.layout.employee_info_fragment, users);
-        mContext = context;
-        mEmployees = users;
+    public EmployeeListAdapter(@NonNull Context context, @NonNull List<Employee> employeeList) {
+        super(context, R.layout.employee_list_item_fragment, employeeList);
+        this.context = context;
+        this.employeeList = employeeList;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(mContext).inflate(R.layout.employee_info_fragment, parent, false);
-        }
+        if (listItemView == null)
+            listItemView = LayoutInflater.from(context).inflate(R.layout.employee_list_item_fragment, parent, false);
 
-        Employee currentEmployee = mEmployees.get(position);
+        Employee currentEmployee = employeeList.get(position);
 
         TextView nameTextView = listItemView.findViewById(R.id.text_view_firstname);
-        if (currentEmployee.name != null) {
-            nameTextView.setText(currentEmployee.name);
-        }
-
         TextView lastnameTextView = listItemView.findViewById(R.id.text_view_lastname);
-        if (currentEmployee.surname != null) {
-            lastnameTextView.setText(currentEmployee.surname);
-        }
-
         TextView birthdayTextView = listItemView.findViewById(R.id.text_view_birthday);
-        if (currentEmployee.birthday != null) {
-            birthdayTextView.setText(currentEmployee.birthday.toString());
-        }
-
         TextView emailTextView = listItemView.findViewById(R.id.text_view_email);
-        if (currentEmployee.email != null) {
-            emailTextView.setText(currentEmployee.email);
-        }
-
         TextView hireDateTextView = listItemView.findViewById(R.id.text_view_hire_date);
-        if (currentEmployee.hireDate != null) {
-            hireDateTextView.setText(currentEmployee.hireDate.toString());
-        }
-
         TextView jobTextView = listItemView.findViewById(R.id.text_view_job);
-        if (currentEmployee.job != null) {
-            jobTextView.setText(currentEmployee.job);
-        }
-
         TextView departmentTextView = listItemView.findViewById(R.id.text_view_department);
-        if (currentEmployee.department != null) {
-            departmentTextView.setText(currentEmployee.department);
-        }
-
         TextView salaryTextView = listItemView.findViewById(R.id.text_view_salary);
-        salaryTextView.setText(String.valueOf(currentEmployee.salary));
+
+        nameTextView.setText(currentEmployee.name != null ? currentEmployee.name : "");
+        lastnameTextView.setText(currentEmployee.surname != null ? currentEmployee.surname : "");
+        birthdayTextView.setText(currentEmployee.birthday != null ? currentEmployee.birthday.toString() : "");
+        emailTextView.setText(currentEmployee.email != null ? currentEmployee.email : "");
+        hireDateTextView.setText(currentEmployee.hireDate != null ? currentEmployee.hireDate.toString() : "");
+        jobTextView.setText(currentEmployee.job != null ? currentEmployee.job : "");
+        departmentTextView.setText(currentEmployee.department != null ? currentEmployee.department : "");
+        salaryTextView.setText(currentEmployee.salary != 0.0 ? String.valueOf(currentEmployee.salary) : "");
 
         return listItemView;
     }

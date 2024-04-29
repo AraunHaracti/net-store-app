@@ -16,13 +16,13 @@ import com.example.netstore.models.Place;
 import java.util.List;
 
 public class PlaceListAdapter extends ArrayAdapter<Place> {
-    private Context mContext;
-    private List<Place> mPlaces;
+    private Context context;
+    private List<Place> placeList;
 
-    public PlaceListAdapter(@NonNull Context context, @NonNull List<Place> places) {
-        super(context, R.layout.place_list_item_fragment, places);
-        mContext = context;
-        mPlaces = places;
+    public PlaceListAdapter(@NonNull Context context, @NonNull List<Place> placeList) {
+        super(context, R.layout.place_list_item_fragment, placeList);
+        this.context = context;
+        this.placeList = placeList;
     }
 
     @NonNull
@@ -30,16 +30,16 @@ public class PlaceListAdapter extends ArrayAdapter<Place> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView == null) {
-            listItemView = LayoutInflater.from(mContext).inflate(R.layout.place_list_item_fragment, parent, false);
+            listItemView = LayoutInflater.from(context).inflate(R.layout.place_list_item_fragment, parent, false);
         }
 
-        Place currentPlace = mPlaces.get(position);
+        Place currentPlace = placeList.get(position);
 
         TextView nameTextView = listItemView.findViewById(R.id.text_view_name);
-        nameTextView.setText(currentPlace.name);
-
         TextView descriptionTextView = listItemView.findViewById(R.id.text_view_description);
-        descriptionTextView.setText(currentPlace.description);
+
+        nameTextView.setText(currentPlace.name != null ? currentPlace.name : "");
+        descriptionTextView.setText(currentPlace.description != null ? currentPlace.description : "");
 
         return listItemView;
     }

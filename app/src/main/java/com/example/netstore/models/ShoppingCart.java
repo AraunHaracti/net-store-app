@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ShoppingCart {
     public String idUser;
-    public int totalPayable;
+    public double totalPayable;
     public List<ProductNested> cartItems;
 
     public ShoppingCart() {

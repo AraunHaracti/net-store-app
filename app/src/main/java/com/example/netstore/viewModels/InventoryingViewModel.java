@@ -10,7 +10,6 @@ import com.example.netstore.models.Product;
 import com.example.netstore.models.nested.ProductNested;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,20 +23,24 @@ public class InventoryingViewModel {
         return mutableLiveData;
     }
 
-    public void receiveInventorying(Place place, Product product, int count) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
-        DocumentReference documentReference = collectionReference.document(place._id);
+    private FirebaseFirestore firestore;
 
-        fStore.collection("products").document(product._id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    public InventoryingViewModel() {
+        firestore = FirebaseFirestore.getInstance();
+    }
+
+    public void receiveInventorying(Place place, Product product, int count) {
+        DocumentReference documentReference = firestore.collection("places").document(place._id);
+
+        firestore.collection("products").document(product._id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 int countProducts = documentSnapshot.toObject(Product.class).count + count;
 
-                fStore.collection("products").document(product._id).update("count", countProducts).addOnSuccessListener(new OnSuccessListener<Void>() {
+                firestore.collection("products").document(product._id).update("count", countProducts).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        fStore.runTransaction(transaction -> {
+                        firestore.runTransaction(transaction -> {
                             DocumentSnapshot documentSnapshot = transaction.get(documentReference);
                             List<ProductNested> productNestedList = documentSnapshot.toObject(Place.class).products;
 
@@ -84,19 +87,17 @@ public class InventoryingViewModel {
     }
 
     public void sendInventorying(Place place, Product product, int count) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
-        DocumentReference documentReference = collectionReference.document(place._id);
+        DocumentReference documentReference = firestore.collection("places").document(place._id);
 
-        fStore.collection("products").document(product._id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firestore.collection("products").document(product._id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 int countProducts = documentSnapshot.toObject(Product.class).count - count;
 
-                fStore.collection("products").document(product._id).update("count", countProducts).addOnSuccessListener(new OnSuccessListener<Void>() {
+                firestore.collection("products").document(product._id).update("count", countProducts).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        fStore.runTransaction(transaction -> {
+                        firestore.runTransaction(transaction -> {
                             DocumentSnapshot documentSnapshot = transaction.get(documentReference);
                             List<ProductNested> productNestedList = documentSnapshot.toObject(Place.class).products;
 
@@ -143,12 +144,10 @@ public class InventoryingViewModel {
     }
 
     public void moveInventorying(Place placeBegin, Place placeEnd, Product product, int count) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
-        DocumentReference documentReferenceBegin = collectionReference.document(placeBegin._id);
-        DocumentReference documentReferenceEnd = collectionReference.document(placeEnd._id);
+        DocumentReference documentReferenceBegin = firestore.collection("places").document(placeBegin._id);
+        DocumentReference documentReferenceEnd = firestore.collection("places").document(placeEnd._id);
 
-        fStore.runTransaction(transaction_1 -> {
+        firestore.runTransaction(transaction_1 -> {
             List<ProductNested> productNestedListBegin = transaction_1.get(documentReferenceBegin).toObject(Place.class).products;
 
             for (int i = 0; i < productNestedListBegin.size(); i++) {
@@ -161,7 +160,7 @@ public class InventoryingViewModel {
             transaction_1.update(documentReferenceBegin, "products", productNestedListBegin);
 
 
-            fStore.runTransaction(transaction_2 -> {
+            firestore.runTransaction(transaction_2 -> {
                 List<ProductNested> productNestedListEnd = transaction_2.get(documentReferenceEnd).toObject(Place.class).products;
 
                 boolean addFlag = false;

@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 
 import com.example.netstore.R;
 import com.example.netstore.databinding.SignUpFragmentBinding;
+import com.example.netstore.models.ShoppingCart;
 import com.example.netstore.models.User;
+import com.example.netstore.viewModels.ShoppingCartViewModel;
 import com.example.netstore.viewModels.UserViewModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -64,6 +66,9 @@ public class SignUpFragment extends Fragment {
 
             viewModel.getInfoData().observe(getViewLifecycleOwner(), observerObject -> {
                 if (Objects.equals(observerObject.tag, "reg user") && observerObject.status) {
+                    ShoppingCartViewModel cartViewModel = new ShoppingCartViewModel();
+                    cartViewModel.createShoppingCart((User) observerObject.item);
+
                     getParentFragmentManager().popBackStack();
                 } else {
                     Toast.makeText(getContext(), "Registration failed.",

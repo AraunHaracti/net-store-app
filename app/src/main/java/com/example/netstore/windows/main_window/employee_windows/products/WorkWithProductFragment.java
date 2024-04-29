@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
+import com.bumptech.glide.Glide;
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.config.WorkWithItemMode;
 import com.example.netstore.databinding.WorkWithProductFragmentBinding;
@@ -47,8 +48,11 @@ public class WorkWithProductFragment extends Fragment {
         if (currentProduct != null) {
             binding.textEditName.setText(currentProduct.name);
             binding.textEditDescription.setText(currentProduct.description);
-            binding.imageViewProduct.setImageURI(Uri.fromFile(new File(currentProduct.photoPath)));
             binding.textEditPrice.setText(currentProduct.price.toString());
+
+            Glide.with(getContext()).load(Uri.parse(currentProduct.photoPath)).into(binding.imageViewProduct);
+
+            photoUri = Uri.parse(currentProduct.photoPath);
         }
 
         return binding.getRoot();
@@ -126,7 +130,10 @@ public class WorkWithProductFragment extends Fragment {
             return false;
         }
 
-        this.currentProduct = new Product(name, description, photoUri.toString(), Double.parseDouble(priceString), 0);
+        if (this.currentProduct == null)
+            this.currentProduct = new Product(name, description, photoUri.toString(), Double.parseDouble(priceString), 0);
+        else
+            this.currentProduct = new Product(currentProduct._id, name, description, photoUri.toString(), currentProduct.price, currentProduct.count);
 
         return true;
     }

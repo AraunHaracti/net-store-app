@@ -2,14 +2,13 @@ package com.example.netstore.viewModels;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.netstore.config.Config;
 import com.example.netstore.config.ObserverObject;
+import com.example.netstore.config.SharedPreferencesConfig;
 import com.example.netstore.models.Client;
 import com.example.netstore.models.Employee;
 import com.example.netstore.models.User;
@@ -33,23 +32,23 @@ public class UserViewModel {
         return mutableLiveData;
     }
 
-    public void checkLogin(String login) {
-        FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-        QuerySnapshot querySnapshot = firestore.collection("users").whereEqualTo("login", login).get().getResult();
+    private FirebaseFirestore firestore;
+    private FirebaseAuth firebaseAuth;
 
-        Log.d("check", querySnapshot.toString());
-//        querySnapshot.getDocuments()
-// TODO
-//        for (QueryDocumentSnapshot q : querySnapshot)
-//        }
+    public UserViewModel() {
+        firestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+    }
+
+    public void checkLogin(String login) {
+        // TODO
     }
 
     public void authenticationUser(String email, String password) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                String uid = mAuth.getCurrentUser().getUid();
+                String uid = firebaseAuth.getCurrentUser().getUid();
 
                 FirebaseFirestore fStore = FirebaseFirestore.getInstance();
                 CollectionReference collectionReference = fStore.collection("users");
@@ -80,15 +79,12 @@ public class UserViewModel {
     }
 
     public void registrationUser(String email, String password, User user) {
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        mAuth.createUserWithEmailAndPassword(email, password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
-                    String uid = mAuth.getCurrentUser().getUid();
+                    String uid = firebaseAuth.getCurrentUser().getUid();
                     user.firebaseId = uid;
 
-                    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-                    CollectionReference collectionReference = fStore.collection("users");
-                    DocumentReference docRef = collectionReference.document();
+                    DocumentReference docRef = firestore.collection("users").document();
 
                     user._id = docRef.getId();
 
@@ -96,7 +92,7 @@ public class UserViewModel {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
-                                    mutableLiveData.postValue(new ObserverObject("reg user", true));
+                                    mutableLiveData.postValue(new ObserverObject("reg user", true, user));
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -112,9 +108,7 @@ public class UserViewModel {
     }
 
     public void updateUser(User user) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("users");
-        DocumentReference docRef = collectionReference.document(user._id);
+        DocumentReference docRef = firestore.collection("users").document(user._id);
 
         docRef.set(user)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -132,10 +126,7 @@ public class UserViewModel {
     }
 
     public void getClients() {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("users");
-
-        collectionReference.get()
+        firestore.collection("users").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -177,10 +168,7 @@ public class UserViewModel {
     }
 
     public void getEmployees() {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("users");
-
-        collectionReference.get()
+        firestore.collection("users").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -231,9 +219,7 @@ public class UserViewModel {
             return;
         }
 
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("users");
-        DocumentReference docRef = collectionReference.document(user._id);
+        DocumentReference docRef = firestore.collection("users").document(user._id);
 
         docRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -261,9 +247,7 @@ public class UserViewModel {
             return;
         }
 
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("users");
-        DocumentReference docRef = collectionReference.document(user._id);
+        DocumentReference docRef = firestore.collection("users").document(user._id);
 
         docRef.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -287,8 +271,8 @@ public class UserViewModel {
 
     public void saveCurrentUser(Context context, User user) {
         String currentUserJson = new Gson().toJson(user, User.class);
-        SharedPreferences.Editor editorSP = context.getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE).edit();
-        editorSP.putString(Config.SP_USER_TAG, currentUserJson);
+        SharedPreferences.Editor editorSP = context.getSharedPreferences(SharedPreferencesConfig.SP_FILE_TAG, Context.MODE_PRIVATE).edit();
+        editorSP.putString(SharedPreferencesConfig.SP_USER_TAG, currentUserJson);
         editorSP.apply();
     }
 }

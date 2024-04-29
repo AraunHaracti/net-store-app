@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.models.Place;
-import com.example.netstore.models.Product;
 import com.example.netstore.models.nested.ProductNested;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,19 +19,25 @@ import java.util.List;
 
 public class PlaceViewModel {
     private MutableLiveData<ObserverObject> mutableLiveData = new MutableLiveData<>();
+
     public LiveData<ObserverObject> getInfoData() {
         return mutableLiveData;
     }
 
+    private FirebaseFirestore firestore;
+
+    private String collectionName = "places";
+
+    public PlaceViewModel() {
+        firestore = FirebaseFirestore.getInstance();
+    }
+
     public void addPlace(Place place) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
+        DocumentReference documentRef = firestore.collection(collectionName).document();
 
-        DocumentReference newPlaceRef = collectionReference.document();
+        place._id = documentRef.getId();
 
-        place._id = newPlaceRef.getId();
-
-        newPlaceRef.set(place)
+        documentRef.set(place)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -49,10 +53,7 @@ public class PlaceViewModel {
     }
 
     public void editPlace(Place place) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
-
-        collectionReference.document(place._id).set(place)
+        firestore.collection(collectionName).document(place._id).set(place)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -68,10 +69,7 @@ public class PlaceViewModel {
     }
 
     public void deletePlace(Place place) {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
-
-        collectionReference.document(place._id).delete()
+        firestore.collection(collectionName).document(place._id).delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
@@ -87,9 +85,8 @@ public class PlaceViewModel {
     }
 
     public void getPlaces() {
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        CollectionReference collectionReference = fStore.collection("places");
-        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        firestore.collection(collectionName).get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         List<Place> placeList = new ArrayList<>();

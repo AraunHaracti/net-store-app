@@ -15,18 +15,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import com.example.netstore.R;
 import com.example.netstore.adapters.ProductListAdapter;
 import com.example.netstore.config.Config;
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.databinding.ListItemsFragmentBinding;
-import com.example.netstore.databinding.ListItemsWithBtnFragmentBinding;
 import com.example.netstore.models.Product;
 import com.example.netstore.models.User;
 import com.example.netstore.viewModels.ProductViewModel;
 import com.example.netstore.viewModels.ShoppingCartViewModel;
-import com.example.netstore.viewModels.UserViewModel;
-import com.example.netstore.windows.main_window.employee_windows.products.WorkWithProductFragment;
 import com.google.gson.Gson;
 
 import java.util.List;

@@ -16,49 +16,35 @@ import com.example.netstore.models.Client;
 import java.util.List;
 
 public class ClientListAdapter extends ArrayAdapter<Client> {
-    private Context mContext;
-    private List<Client> mClients;
+    private Context context;
+    private List<Client> clientList;
 
-    public ClientListAdapter(@NonNull Context context, @NonNull List<Client> clients) {
-        super(context, R.layout.client_info_fragment, clients);
-        mContext = context;
-        mClients = clients;
+    public ClientListAdapter(@NonNull Context context, @NonNull List<Client> clientList) {
+        super(context, R.layout.client_list_item_fragment, clientList);
+        this.context = context;
+        this.clientList = clientList;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItemView = convertView;
-        if (listItemView == null) {
-            listItemView = LayoutInflater.from(mContext).inflate(R.layout.client_info_fragment, parent, false);
-        }
+        if (listItemView == null)
+            listItemView = LayoutInflater.from(context).inflate(R.layout.client_list_item_fragment, parent, false);
 
-        Client currentClient = mClients.get(position);
+        Client currentClient = clientList.get(position);
 
         TextView nameTextView = listItemView.findViewById(R.id.text_view_firstname);
-        if (currentClient.name != null) {
-            nameTextView.setText(currentClient.name);
-        }
-
         TextView lastnameTextView = listItemView.findViewById(R.id.text_view_lastname);
-        if (currentClient.surname != null) {
-            lastnameTextView.setText(currentClient.surname);
-        }
-
         TextView birthdayTextView = listItemView.findViewById(R.id.text_view_birthday);
-        if (currentClient.birthday != null) {
-            birthdayTextView.setText(currentClient.birthday.toString());
-        }
-
         TextView emailTextView = listItemView.findViewById(R.id.text_view_email);
-        if (currentClient.email != null) {
-            emailTextView.setText(currentClient.email);
-        }
-
         TextView addressTextView = listItemView.findViewById(R.id.text_view_address);
-        if (currentClient.address != null) {
-            addressTextView.setText(currentClient.address);
-        }
+
+        nameTextView.setText(currentClient.name != null ? currentClient.name : "");
+        lastnameTextView.setText(currentClient.surname != null ? currentClient.surname : "");
+        birthdayTextView.setText(currentClient.birthday != null ? currentClient.birthday.toString() : "");
+        emailTextView.setText(currentClient.email != null ? currentClient.email : "");
+        addressTextView.setText(currentClient.address != null ? currentClient.address : "");
 
         return listItemView;
     }

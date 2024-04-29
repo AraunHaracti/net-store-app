@@ -1,5 +1,6 @@
 package com.example.netstore.models;
 
+import android.media.Image;
 import android.net.Uri;
 
 import java.net.URI;
