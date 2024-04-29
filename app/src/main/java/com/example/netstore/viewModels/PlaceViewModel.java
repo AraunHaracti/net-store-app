@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.models.Place;
+import com.example.netstore.models.Product;
 import com.example.netstore.models.nested.ProductNested;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

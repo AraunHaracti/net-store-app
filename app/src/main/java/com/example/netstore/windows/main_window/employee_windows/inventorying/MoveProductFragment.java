@@ -130,7 +130,7 @@ public class MoveProductFragment extends Fragment {
                     viewModel.getInfoData().observe(getViewLifecycleOwner(), new Observer<ObserverObject>() {
                         @Override
                         public void onChanged(ObserverObject observerObject) {
-                            if (observerObject.tag == "send" && observerObject.status) {
+                            if (observerObject.tag == "move" && observerObject.status) {
                                 getParentFragmentManager().popBackStack();
                             }
                         }
