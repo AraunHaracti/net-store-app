@@ -12,7 +12,7 @@ public class Config {
     public static final String SP_TAG_NAME_SEND_PRODUCT = "SP_TAG_NAME_SEND_PRODUCT";
 
     // Move
-    public static final String SP_TAG_NAME_MOVE_PLACE_1 = "SP_TAG_NAME_MOVE_PLACE_1";
-    public static final String SP_TAG_NAME_MOVE_PLACE_2 = "SP_TAG_NAME_MOVE_PLACE_2";
+    public static final String SP_TAG_NAME_MOVE_PLACE_BEGIN = "SP_TAG_NAME_MOVE_PLACE_BEGIN";
+    public static final String SP_TAG_NAME_MOVE_PLACE_END = "SP_TAG_NAME_MOVE_PLACE_END";
     public static final String SP_TAG_NAME_MOVE_PRODUCT = "SP_TAG_NAME_MOVE_PRODUCT";
 }

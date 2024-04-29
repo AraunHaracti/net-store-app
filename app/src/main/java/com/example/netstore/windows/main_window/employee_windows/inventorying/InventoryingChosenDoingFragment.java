@@ -1,5 +1,7 @@
 package com.example.netstore.windows.main_window.employee_windows.inventorying;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,5 +60,28 @@ public class InventoryingChosenDoingFragment extends Fragment {
                         .commit();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        setSPNull();
+    }
+
+    private void setSPNull() {
+        SharedPreferences.Editor editorSP = getActivity().getSharedPreferences(Config.SP_FILE_NAME, Context.MODE_PRIVATE).edit();
+
+        editorSP.putString(Config.SP_TAG_NAME_RECEIVE_PRODUCT, "");
+        editorSP.putString(Config.SP_TAG_NAME_RECEIVE_PLACE, "");
+
+        editorSP.putString(Config.SP_TAG_NAME_SEND_PRODUCT, "");
+        editorSP.putString(Config.SP_TAG_NAME_SEND_PLACE, "");
+
+        editorSP.putString(Config.SP_TAG_NAME_MOVE_PRODUCT, "");
+        editorSP.putString(Config.SP_TAG_NAME_MOVE_PLACE_BEGIN, "");
+        editorSP.putString(Config.SP_TAG_NAME_MOVE_PLACE_END, "");
+
+        editorSP.apply();
     }
 }

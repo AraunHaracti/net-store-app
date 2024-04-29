@@ -20,7 +20,7 @@ import com.example.netstore.config.Config;
 import com.example.netstore.databinding.EmployeeMainWindowFragmentBinding;
 import com.example.netstore.windows.main_window.employee_windows.account.EmployeeAccountFragment;
 import com.example.netstore.windows.main_window.employee_windows.inventorying.InventoryingChosenDoingFragment;
-import com.example.netstore.windows.main_window.employee_windows.orders.OrdersFragment;
+import com.example.netstore.windows.main_window.employee_windows.orders.OrderListFragment;
 import com.example.netstore.windows.main_window.employee_windows.places.PlaceListFragment;
 import com.example.netstore.windows.main_window.employee_windows.products.ProductListFragment;
 import com.example.netstore.windows.main_window.employee_windows.users.UserBtnFragment;
@@ -88,7 +88,7 @@ public class EmployeeMainWindowFragment extends Fragment {
             public void onClick(View v) {
                 getParentFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container_fragment, new OrdersFragment(), "orders")
+                        .replace(R.id.container_fragment, new OrderListFragment(), "orders")
                         .addToBackStack("employee_main_window")
                         .commit();
             }
