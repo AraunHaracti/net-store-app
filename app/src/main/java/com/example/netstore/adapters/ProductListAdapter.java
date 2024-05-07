@@ -40,7 +40,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 
         TextView nameTextView = listItemView.findViewById(R.id.text_view_name);
         TextView descriptionTextView = listItemView.findViewById(R.id.text_view_description);
-        ImageView photoImageView = listItemView.findViewById(R.id.image_view_photo); // TODO
+        ImageView photoImageView = listItemView.findViewById(R.id.image_view_photo);
         TextView priceTextView = listItemView.findViewById(R.id.text_view_price);
         TextView countTextView = listItemView.findViewById(R.id.text_view_count);
 

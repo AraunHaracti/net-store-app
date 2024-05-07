@@ -13,14 +13,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.netstore.R;
-import com.example.netstore.config.Config;
 import com.example.netstore.config.ObserverObject;
+import com.example.netstore.config.SharedPreferencesConfig;
 import com.example.netstore.databinding.ClientAccountFragmentBinding;
 import com.example.netstore.models.Client;
 import com.example.netstore.models.User;
 import com.example.netstore.viewModels.UserViewModel;
 import com.example.netstore.windows.main_window.employee_windows.account.WorkWithUserFragment;
 import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
 
 public class ClientAccountFragment extends Fragment {
     private ClientAccountFragmentBinding binding;
@@ -52,8 +54,8 @@ public class ClientAccountFragment extends Fragment {
             }
         });
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE);
-        User user = new Gson().fromJson(sharedPreferences.getString(Config.SP_USER_TAG, ""), User.class);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SharedPreferencesConfig.SP_FILE_TAG, Context.MODE_PRIVATE);
+        User user = new Gson().fromJson(sharedPreferences.getString(SharedPreferencesConfig.SP_USER_TAG, ""), User.class);
         viewModel.getClient(user);
 
         binding.editItemBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +73,7 @@ public class ClientAccountFragment extends Fragment {
     private void setValues(Client client) {
         binding.textViewFirstname.setText(client.name != null ? client.name : "");
         binding.textViewLastname.setText(client.surname != null ? client.surname : "");
-        binding.textViewBirthday.setText(client.birthday != null ? client.birthday.toString() : "");
+        binding.textViewBirthday.setText(client.birthday != null ? new SimpleDateFormat("dd MMM yyyy г.").format(client.birthday) : "");
         binding.textViewEmail.setText(client.email != null ? client.email : "");
         binding.textViewAddress.setText(client.address != null ? client.address : "");
     }

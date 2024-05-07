@@ -25,7 +25,7 @@
         android:layout_width="200dp"
         android:layout_margin="10dp"
         android:layout_height="wrap_content"
-        android:text="@string/product" />
+        android:text="@string/products" />
 
     <Button
         android:id="@+id/users_btn"

@@ -133,7 +133,7 @@ public class WorkWithProductFragment extends Fragment {
         if (this.currentProduct == null)
             this.currentProduct = new Product(name, description, photoUri.toString(), Double.parseDouble(priceString), 0);
         else
-            this.currentProduct = new Product(currentProduct._id, name, description, photoUri.toString(), currentProduct.price, currentProduct.count);
+            this.currentProduct = new Product(currentProduct._id, name, description, photoUri.toString(), Double.parseDouble(priceString), currentProduct.count);
 
         return true;
     }

@@ -107,6 +107,14 @@ public class UserViewModel {
                 });
     }
 
+    public void registrationEmployee(String email, String password, Employee employee) {
+        mutableLiveData.postValue(new ObserverObject("reg employee", false));
+    }
+
+    public void updateEmployee(Employee employee) {
+        mutableLiveData.postValue(new ObserverObject("update employee", false));
+    }
+
     public void updateUser(User user) {
         DocumentReference docRef = firestore.collection("users").document(user._id);
 
@@ -198,7 +206,9 @@ public class UserViewModel {
                             employee.department = documentSnapshot.getString("department");
                             employee.hireDate = documentSnapshot.getDate("hireDate");
                             employee.job = documentSnapshot.getString("job");
-                            employee.salary = documentSnapshot.get("salary", double.class);
+
+                            Double salary = documentSnapshot.getDouble("salary");
+                            employee.salary = (salary != null) ? salary : 0.0;
 
                             employeeList.add(employee);
                         }

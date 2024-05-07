@@ -6,8 +6,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.netstore.config.Config;
 import com.example.netstore.MainActivity;
+import com.example.netstore.config.SharedPreferencesConfig;
 import com.example.netstore.models.User;
 import com.example.netstore.windows.main_window.client_windows.ClientWindowActivity;
 import com.example.netstore.windows.main_window.employee_windows.EmployeeWindowActivity;
@@ -19,9 +19,9 @@ public class MainWindowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SP_FILE_TAG, MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(SharedPreferencesConfig.SP_FILE_TAG, MODE_PRIVATE);
 
-        String user = sharedPreferences.getString(Config.SP_USER_TAG, "");
+        String user = sharedPreferences.getString(SharedPreferencesConfig.SP_USER_TAG, "");
 
         User currentUser = new Gson().fromJson(user, User.class);
 

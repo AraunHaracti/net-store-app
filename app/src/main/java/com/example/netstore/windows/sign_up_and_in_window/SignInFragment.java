@@ -1,9 +1,7 @@
 package com.example.netstore.windows.sign_up_and_in_window;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +11,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
-import com.example.netstore.config.Config;
-import com.example.netstore.config.ObserverObject;
 import com.example.netstore.R;
 import com.example.netstore.databinding.SignInFragmentBinding;
 import com.example.netstore.models.User;
 import com.example.netstore.viewModels.UserViewModel;
 import com.example.netstore.windows.main_window.MainWindowActivity;
-import com.google.gson.Gson;
 
 import java.util.Objects;
 

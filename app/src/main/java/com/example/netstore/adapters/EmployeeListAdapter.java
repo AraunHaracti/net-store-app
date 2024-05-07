@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.example.netstore.R;
 import com.example.netstore.models.Employee;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class EmployeeListAdapter extends ArrayAdapter<Employee> {
@@ -45,7 +46,7 @@ public class EmployeeListAdapter extends ArrayAdapter<Employee> {
 
         nameTextView.setText(currentEmployee.name != null ? currentEmployee.name : "");
         lastnameTextView.setText(currentEmployee.surname != null ? currentEmployee.surname : "");
-        birthdayTextView.setText(currentEmployee.birthday != null ? currentEmployee.birthday.toString() : "");
+        birthdayTextView.setText(currentEmployee.birthday != null ? new SimpleDateFormat("dd MMM yyyy г.").format(currentEmployee.birthday) : "");
         emailTextView.setText(currentEmployee.email != null ? currentEmployee.email : "");
         hireDateTextView.setText(currentEmployee.hireDate != null ? currentEmployee.hireDate.toString() : "");
         jobTextView.setText(currentEmployee.job != null ? currentEmployee.job : "");

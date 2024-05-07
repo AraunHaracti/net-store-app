@@ -6,39 +6,63 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/text_view_firstname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/firstname"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/text_view_firstname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lastname"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/text_view_lastname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lastname"
         android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/birthday"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/text_view_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/birthday"
         android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/email"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/text_view_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/email"
         android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/text_view_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/address"
         android:textSize="16sp" />
 
 </LinearLayout>

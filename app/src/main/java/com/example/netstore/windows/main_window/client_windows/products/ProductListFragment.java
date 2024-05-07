@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.netstore.adapters.ProductListAdapter;
-import com.example.netstore.config.Config;
 import com.example.netstore.config.ObserverObject;
+import com.example.netstore.config.SharedPreferencesConfig;
 import com.example.netstore.databinding.ListItemsFragmentBinding;
 import com.example.netstore.models.Product;
 import com.example.netstore.models.User;
@@ -63,10 +64,21 @@ public class ProductListFragment extends Fragment {
                         switch (which) {
                             case 0:
 
-                                SharedPreferences preferences = getActivity().getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE);
-                                User currentUser = new Gson().fromJson(preferences.getString(Config.SP_FILE_TAG, ""), User.class);
+                                SharedPreferences preferences = getActivity().getSharedPreferences(SharedPreferencesConfig.SP_FILE_TAG, Context.MODE_PRIVATE);
+                                User currentUser = new Gson().fromJson(preferences.getString(SharedPreferencesConfig.SP_USER_TAG, ""), User.class);
 
                                 ShoppingCartViewModel viewModel = new ShoppingCartViewModel();
+
+                                viewModel.getInfoData().observe(getViewLifecycleOwner(), new Observer<ObserverObject>() {
+                                    @Override
+                                    public void onChanged(ObserverObject observerObject) {
+                                        if (observerObject.tag == "add product cart" && observerObject.status) {
+                                            Toast.makeText(getContext(), "Добавление товара в корзину", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getContext(), "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
 
                                 viewModel.addProductInShoppingCart(currentUser, product);
 

@@ -18,6 +18,7 @@ import com.example.netstore.models.User;
 import com.example.netstore.viewModels.UserViewModel;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WorkWithUserFragment extends Fragment {
@@ -38,7 +39,7 @@ public class WorkWithUserFragment extends Fragment {
         if (currentUser != null) {
             binding.textEditFirstname.setText(currentUser.name != null ? currentUser.name : "");
             binding.editTextLastname.setText(currentUser.surname != null ? currentUser.surname : "");
-            binding.textEditBirthday.setText(currentUser.birthday != null ? currentUser.birthday.toString() : ""); // TODO
+            binding.textEditBirthday.setText(currentUser.birthday != null ? new SimpleDateFormat("dd MMM yyyy г.").format(currentUser.birthday) : "");
             binding.textEditEmail.setText(currentUser.email != null ? currentUser.email : "");
         }
 

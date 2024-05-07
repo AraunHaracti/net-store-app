@@ -13,13 +13,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
 import com.example.netstore.R;
-import com.example.netstore.config.Config;
 import com.example.netstore.config.ObserverObject;
+import com.example.netstore.config.SharedPreferencesConfig;
 import com.example.netstore.databinding.EmployeeAccountFragmentBinding;
 import com.example.netstore.models.Employee;
 import com.example.netstore.models.User;
 import com.example.netstore.viewModels.UserViewModel;
 import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
 
 public class EmployeeAccountFragment extends Fragment {
     private EmployeeAccountFragmentBinding binding;
@@ -51,8 +53,8 @@ public class EmployeeAccountFragment extends Fragment {
             }
         });
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE);
-        User user = new Gson().fromJson(sharedPreferences.getString(Config.SP_USER_TAG, ""), User.class);
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SharedPreferencesConfig.SP_FILE_TAG, Context.MODE_PRIVATE);
+        User user = new Gson().fromJson(sharedPreferences.getString(SharedPreferencesConfig.SP_USER_TAG, ""), User.class);
         viewModel.getEmployee(user);
 
         binding.editItemBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,10 +72,10 @@ public class EmployeeAccountFragment extends Fragment {
     private void setValues(Employee employee) {
         binding.textViewFirstname.setText(employee.name != null ? employee.name : "");
         binding.textViewLastname.setText(employee.surname != null ? employee.surname : "");
-        binding.textViewBirthday.setText(employee.birthday != null ? employee.birthday.toString() : "");
+        binding.textViewBirthday.setText(employee.birthday != null ? new SimpleDateFormat("dd MMM yyyy г.").format(employee.birthday) : "");
         binding.textViewEmail.setText(employee.email != null ? employee.email : "");
         binding.textViewDepartment.setText(employee.department != null ? employee.department : "");
-        binding.textViewHireDate.setText(employee.hireDate != null ? employee.hireDate.toString() : ""); // TODO
+        binding.textViewHireDate.setText(employee.hireDate != null ? new SimpleDateFormat("dd MMM yyyy г.").format(employee.hireDate) : "");
         binding.textViewJob.setText(employee.job != null ? employee.job : "");
         binding.textViewSalary.setText(employee.salary != 0.0 ? String.valueOf(employee.salary) : "");
     }

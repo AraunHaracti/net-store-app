@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import com.example.netstore.R;
 import com.example.netstore.models.Client;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ClientListAdapter extends ArrayAdapter<Client> {
@@ -42,7 +43,7 @@ public class ClientListAdapter extends ArrayAdapter<Client> {
 
         nameTextView.setText(currentClient.name != null ? currentClient.name : "");
         lastnameTextView.setText(currentClient.surname != null ? currentClient.surname : "");
-        birthdayTextView.setText(currentClient.birthday != null ? currentClient.birthday.toString() : "");
+        birthdayTextView.setText(currentClient.birthday != null ? new SimpleDateFormat("dd MMM yyyy г.").format(currentClient.birthday) : "");
         emailTextView.setText(currentClient.email != null ? currentClient.email : "");
         addressTextView.setText(currentClient.address != null ? currentClient.address : "");
 

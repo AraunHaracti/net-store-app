@@ -11,6 +11,18 @@ public class Employee extends User {
     public Employee() {
     }
 
+    public Employee(String name, String surname, Date birthday, String email, UserType type) {
+        super(name, surname, birthday, email, type);
+    }
+
+    public Employee(String name, String surname, Date birthday, String email, UserType type, Date hireDate, String job, String department, double salary) {
+        super(name, surname, birthday, email, type);
+        this.hireDate = hireDate;
+        this.job = job;
+        this.department = department;
+        this.salary = salary;
+    }
+
     public Employee(String _id, String firebaseId, String email, String name, String surname, Date birthday, UserType type) {
         super(_id, firebaseId, email, name, surname, birthday, type);
     }

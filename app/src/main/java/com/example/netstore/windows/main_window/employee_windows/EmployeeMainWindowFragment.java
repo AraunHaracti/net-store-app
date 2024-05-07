@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.netstore.MainActivity;
 import com.example.netstore.R;
-import com.example.netstore.config.Config;
+import com.example.netstore.config.SharedPreferencesConfig;
 import com.example.netstore.databinding.EmployeeMainWindowFragmentBinding;
 import com.example.netstore.windows.main_window.employee_windows.account.EmployeeAccountFragment;
 import com.example.netstore.windows.main_window.employee_windows.inventorying.InventoryingChosenDoingFragment;
@@ -109,8 +109,8 @@ public class EmployeeMainWindowFragment extends Fragment {
         builder.setMessage("Выйти?");
         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                SharedPreferences.Editor spEditor = getContext().getSharedPreferences(Config.SP_FILE_TAG, Context.MODE_PRIVATE).edit();
-                spEditor.putString(Config.SP_USER_TAG, "");
+                SharedPreferences.Editor spEditor = getContext().getSharedPreferences(SharedPreferencesConfig.SP_FILE_TAG, Context.MODE_PRIVATE).edit();
+                spEditor.putString(SharedPreferencesConfig.SP_USER_TAG, "");
                 spEditor.apply();
 
                 closeActivity();
