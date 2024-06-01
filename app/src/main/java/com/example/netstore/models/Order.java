@@ -2,7 +2,6 @@ package com.example.netstore.models;
 
 import com.example.netstore.models.nested.DeliveryDataNested;
 import com.example.netstore.models.nested.PaymentDataNested;
-import com.example.netstore.models.nested.ProductNested;
 
 import java.util.Date;
 import java.util.List;
@@ -19,12 +18,12 @@ public class Order {
     public DeliveryDataNested deliveryData;
     public PaymentDataNested paymentData;
 
-    public List<ProductNested> productOrderList;
+    public List<Product> productOrderList;
 
     public Order() {
     }
 
-    public Order(String idUser, double totalPayable, String status, Date dateCreate, Date dateUpdate, DeliveryDataNested deliveryData, PaymentDataNested paymentData, List<ProductNested> productOrderList) {
+    public Order(String idUser, double totalPayable, String status, Date dateCreate, Date dateUpdate, DeliveryDataNested deliveryData, PaymentDataNested paymentData, List<Product> productOrderList) {
         this.idUser = idUser;
         this.totalPayable = totalPayable;
         this.status = status;

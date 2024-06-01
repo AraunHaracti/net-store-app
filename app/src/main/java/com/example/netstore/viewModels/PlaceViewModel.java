@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.models.Place;
-import com.example.netstore.models.nested.ProductNested;
+import com.example.netstore.models.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -96,7 +96,7 @@ public class PlaceViewModel {
                             place._id = documentSnapshot.getString("_id");
                             place.name = documentSnapshot.getString("name");
                             place.description = documentSnapshot.getString("description");
-                            place.products = (List<ProductNested>) documentSnapshot.get("products");
+                            place.products = (List<Product>) documentSnapshot.get("products");
 
                             placeList.add(place);
                         }

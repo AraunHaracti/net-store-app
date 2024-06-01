@@ -16,6 +16,13 @@ public class Product {
     public Product() {
     }
 
+    public Product(String _id, String name, Double price, int count) {
+        this._id = _id;
+        this.name = name;
+        this.price = price;
+        this.count = count;
+    }
+
     public Product(String name, String description, String photoPath, Double price, int count) {
         this.name = name;
         this.description = description;

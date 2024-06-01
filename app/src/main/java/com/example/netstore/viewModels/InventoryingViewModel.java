@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.netstore.config.ObserverObject;
 import com.example.netstore.models.Place;
 import com.example.netstore.models.Product;
-import com.example.netstore.models.nested.ProductNested;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -42,12 +41,12 @@ public class InventoryingViewModel {
                     public void onSuccess(Void unused) {
                         firestore.runTransaction(transaction -> {
                             DocumentSnapshot documentSnapshot = transaction.get(documentReference);
-                            List<ProductNested> productNestedList = documentSnapshot.toObject(Place.class).products;
+                            List<Product> productNestedList = documentSnapshot.toObject(Place.class).products;
 
                             boolean addFlag = false;
                             if (productNestedList != null) {
                                 for (int i = 0; i < productNestedList.size(); i++) {
-                                    if (productNestedList.get(i).idProduct.equals(product._id)) {
+                                    if (productNestedList.get(i)._id.equals(product._id)) {
                                         productNestedList.get(i).count += count;
                                         addFlag = true;
                                         break;
@@ -57,7 +56,7 @@ public class InventoryingViewModel {
                                 productNestedList = new ArrayList<>();
                             }
                             if (!addFlag) {
-                                productNestedList.add(new ProductNested(product._id, product.name, product.price, count));
+                                productNestedList.add(new Product(product._id, product.name, product.price, count));
                             }
 
                             transaction.update(documentReference, "products", productNestedList);
@@ -99,12 +98,12 @@ public class InventoryingViewModel {
                     public void onSuccess(Void unused) {
                         firestore.runTransaction(transaction -> {
                             DocumentSnapshot documentSnapshot = transaction.get(documentReference);
-                            List<ProductNested> productNestedList = documentSnapshot.toObject(Place.class).products;
+                            List<Product> productNestedList = documentSnapshot.toObject(Place.class).products;
 
                             boolean addFlag = false;
                             if (productNestedList != null) {
                                 for (int i = 0; i < productNestedList.size(); i++) {
-                                    if (productNestedList.get(i).idProduct.equals(product._id)) {
+                                    if (productNestedList.get(i)._id.equals(product._id)) {
                                         productNestedList.get(i).count -= count;
                                         addFlag = true;
                                         break;
@@ -114,7 +113,7 @@ public class InventoryingViewModel {
                                 productNestedList = new ArrayList<>();
                             }
                             if (!addFlag) {
-                                productNestedList.add(new ProductNested(product._id, product.name, product.price, count));
+                                productNestedList.add(new Product(product._id, product.name, product.price, count));
                             }
 
                             transaction.update(documentReference, "products", productNestedList);
@@ -148,10 +147,10 @@ public class InventoryingViewModel {
         DocumentReference documentReferenceEnd = firestore.collection("places").document(placeEnd._id);
 
         firestore.runTransaction(transaction_1 -> {
-            List<ProductNested> productNestedListBegin = transaction_1.get(documentReferenceBegin).toObject(Place.class).products;
+            List<Product> productNestedListBegin = transaction_1.get(documentReferenceBegin).toObject(Place.class).products;
 
             for (int i = 0; i < productNestedListBegin.size(); i++) {
-                if (productNestedListBegin.get(i).idProduct.equals(product._id)) {
+                if (productNestedListBegin.get(i)._id.equals(product._id)) {
                     productNestedListBegin.get(i).count -= count;
                     break;
                 }
@@ -161,12 +160,12 @@ public class InventoryingViewModel {
 
 
             firestore.runTransaction(transaction_2 -> {
-                List<ProductNested> productNestedListEnd = transaction_2.get(documentReferenceEnd).toObject(Place.class).products;
+                List<Product> productNestedListEnd = transaction_2.get(documentReferenceEnd).toObject(Place.class).products;
 
                 boolean addFlag = false;
                 if (productNestedListEnd != null) {
                     for (int i = 0; i < productNestedListEnd.size(); i++) {
-                        if (productNestedListEnd.get(i).idProduct.equals(product._id)) {
+                        if (productNestedListEnd.get(i)._id.equals(product._id)) {
                             productNestedListEnd.get(i).count += count;
                             addFlag = true;
                             break;
@@ -176,7 +175,7 @@ public class InventoryingViewModel {
                     productNestedListEnd = new ArrayList<>();
                 }
                 if (!addFlag) {
-                    productNestedListEnd.add(new ProductNested(product._id, product.name, product.price, count));
+                    productNestedListEnd.add(new Product(product._id, product.name, product.price, count));
                 }
 
                 transaction_2.update(documentReferenceEnd, "products", productNestedListEnd);

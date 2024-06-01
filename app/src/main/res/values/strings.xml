@@ -39,4 +39,8 @@
     <string name="place">Место</string>
     <string name="place_begin">Место начала</string>
     <string name="place_end">Место назначения</string>
+    <string name="checkout">Оформить</string>
+    <string name="delivery_date">Дата доставки</string>
+    <string name="status">Статус</string>
+    <string name="total_payable">Сумма</string>
 </resources>

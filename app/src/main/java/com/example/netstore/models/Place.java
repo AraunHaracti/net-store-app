@@ -1,15 +1,12 @@
 package com.example.netstore.models;
 
-import com.example.netstore.models.nested.ProductNested;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Place {
     public String _id;
     public String name;
     public String description;
-    public List<ProductNested> products;
+    public List<Product> products;
 
     public Place() {
     }
@@ -25,7 +22,7 @@ public class Place {
         this.description = description;
     }
 
-    public Place(String _id, String name, String description, List<ProductNested> products) {
+    public Place(String _id, String name, String description, List<Product> products) {
         this._id = _id;
         this.name = name;
         this.description = description;

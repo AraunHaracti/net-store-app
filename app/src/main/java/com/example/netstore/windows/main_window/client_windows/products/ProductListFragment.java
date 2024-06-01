@@ -30,7 +30,6 @@ import java.util.List;
 
 public class ProductListFragment extends Fragment {
     private ListItemsFragmentBinding binding;
-
     private List<Product> productList;
     private ProductListAdapter productListAdapter;
 

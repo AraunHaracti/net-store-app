@@ -1,18 +1,16 @@
 package com.example.netstore.models;
 
-import com.example.netstore.models.nested.ProductNested;
-
 import java.util.List;
 
 public class ShoppingCart {
     public String idUser;
     public double totalPayable;
-    public List<ProductNested> cartItems;
+    public List<Product> cartItems;
 
     public ShoppingCart() {
     }
 
-    public ShoppingCart(String idUser, int totalPayable, List<ProductNested> cartItems) {
+    public ShoppingCart(String idUser, int totalPayable, List<Product> cartItems) {
         this.idUser = idUser;
         this.totalPayable = totalPayable;
         this.cartItems = cartItems;
